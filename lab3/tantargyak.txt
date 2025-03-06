@@ -1,0 +1,20 @@
+7 Programozási Alapok
+8 Adatbázis Kezelés
+9 Algoritmusok
+7 Hálózati Alapismeretek
+6 Operációs Rendszerek
+5 Webfejlesztés
+8 Szoftverfejlesztés
+7 Mobilfejlesztés
+8 Kiberbiztonság
+9 Mesterséges Intelligencia
+9 Gépi Tanulás
+8 Adatbányászat
+7 Számítógépes Architektúrák
+6 Grafikai Programozás
+5 Projektmenedzsment
+4 IT Jogi Alapok
+6 Tesztelés és Hibakeresés
+7 Cloud Technológiák
+6 DevOps Alapok
+8 Etikus Hacker
