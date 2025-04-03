@@ -140,9 +140,10 @@ void getMax(Vizsga * vizsgak, int n){
 int main() {
     int n = 0;
     Vizsga* vizsgak = readFromFile(n);
-    // getMax(vizsgak, n);
-    // getMaxScoreEfficient(vizsgak, n);
-    findAllCombBack(vizsgak, n, from, to);
+    // getMax(vizsgak, n)o
+    
+    getMaxScoreEfficient(vizsgak, n);
+    // findAllCombBack(vizsgak, n, from, to);
     
 
     
