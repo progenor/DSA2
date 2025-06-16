@@ -202,6 +202,77 @@ public:
         return !findPath(start, target).empty();
     }
     
+    // Simple DisjointSet class for cycle detection
+    class DisjointSet {
+    private:
+        vector<int> parent;
+        
+    public:
+        DisjointSet(int n) {
+            parent.resize(n + 1);
+            for (int i = 1; i <= n; i++)
+                parent[i] = i;
+        }
+        
+        // Find root with path compression
+        int find(int x) {
+            if (parent[x] != x)
+                parent[x] = find(parent[x]);
+            return parent[x];
+        }
+        
+        // Union by assigning one root as parent of another
+        void unite(int x, int y) {
+            parent[find(x)] = find(y);
+        }
+    };
+    
+    // Kruskal's algorithm - Add this as a method to your Graph class
+    void kruskalMST() {
+        // 1. Create a vector of all edges
+        vector<tuple<int, int, int>> edges; // (weight, u, v)
+        for (int u = 1; u <= numNodes; u++) {
+            for (const auto& edge : adjList[u]) {
+                int v = edge.first;
+                int weight = edge.second;
+                if (u < v) // Avoid duplicates in undirected graph
+                    edges.push_back({weight, u, v});
+            }
+        }
+        
+        // 2. Sort edges by weight
+        sort(edges.begin(), edges.end());
+        
+        // 3. Initialize result
+        vector<tuple<int, int, int>> result;
+        DisjointSet ds(numNodes);
+        int totalWeight = 0;
+        
+        // 4. Process edges in order of increasing weight
+        cout << "Edges in MST:" << endl;
+        for (const auto& edge : edges) {
+            int weight = get<0>(edge);
+            int u = get<1>(edge);
+            int v = get<2>(edge);
+            
+            // If including this edge doesn't create a cycle
+            if (ds.find(u) != ds.find(v)) {
+                // Add to MST
+                result.push_back(edge);
+                totalWeight += weight;
+                ds.unite(u, v);
+                
+                cout << u << " -- " << v << " (weight: " << weight << ")" << endl;
+                
+                // MST has n-1 edges
+                if (result.size() == numNodes - 1)
+                    break;
+            }
+        }
+        
+        cout << "Total MST weight: " << totalWeight << endl;
+    }
+    
 private:
     // Recursive utility function for DFS
     void dfsUtil(int node, vector<bool>& visited, vector<int>& traversal) {
@@ -273,6 +344,9 @@ int main() {
     } else {
         cout << "No path exists from " << checkFrom << " to " << checkTo << endl;
     }
+    
+    // Kruskal's algorithm example
+    g.kruskalMST();
     
     return 0;
 }
